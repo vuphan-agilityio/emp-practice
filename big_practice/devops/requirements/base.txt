@@ -1,0 +1,31 @@
+# Base dependencies applied to local and production.
+Django==2.0
+
+# Python-PostgreSQL Database Adapter
+psycopg2-binary==2.7.5
+
+# Python Django Tastypie
+django-tastypie==0.14.1
+
+# Configuration
+django-environ==0.4.0
+
+# Django haystack to implement api search
+whoosh==2.7.4
+django-haystack==2.8.1
+
+# JSON WEB TOKEN
+pyjwt==1.7.1
+cryptography==2.4.2
+
+# Django Storages
+boto3==1.9.68
+django-storages==1.7.1
+django-imagekit==4.0.2
+
+# Pillow is required when use ImageField
+Pillow==5.3.0
+
+# Django redis
+django-redis==4.10.0
+redis==3.0.1

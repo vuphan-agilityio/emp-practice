@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+    postgres:
+        build: ../devops/compose/postgres
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=postgres
+        ports:
+            - "5432:5432"
+        env_file: .env
+
+    django:
+        build:
+            context: ../
+            dockerfile: ./devops/compose/django/Dockerfile
+            target: dev
+        command: /runserver.sh
+        depends_on:
+            - postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - USE_DOCKER=yes
+        env_file: .env
+        volumes:
+            - .:/code
+        ports:
+            - "8000:8000"
+        links:
+            - postgres
+
+    redis:
+        build: ../devops/compose/redis
+        ports:
+            - "6379:6379"

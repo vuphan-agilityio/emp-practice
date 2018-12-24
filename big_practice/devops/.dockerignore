@@ -1,0 +1,7 @@
+*.md
+.editorconfig
+.gitignore
+.coverage
+.coveragerc
+
+[Bb]in

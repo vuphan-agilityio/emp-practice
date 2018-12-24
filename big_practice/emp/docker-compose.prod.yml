@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  postgres:
+    build: ../devops/compose/postgres
+    ports:
+        - "5432:5432"
+    env_file: .env
+
+  django:
+    build:
+        context: ../
+        dockerfile: ../devops/compose/django/Dockerfile
+        target: prod
+    depends_on:
+        - postgres
+    command: /gunicorn.sh
+    volumes:
+        - .:/code
+    env_file: .env
+
+  nginx:
+    build: ../devops/compose/nginx
+    depends_on:
+        - django
+
+    ports:
+        - "0.0.0.0:80:80"

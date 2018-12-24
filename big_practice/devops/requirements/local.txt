@@ -1,0 +1,8 @@
+# Base dependencies go here.
+-r base.txt
+
+# Local dependencies go here.
+django-nose==1.4.6
+coverage==4.5.1
+
+flake8==3.0.2
