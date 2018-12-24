@@ -130,7 +130,7 @@ pip-selfcheck.json
 
 ### Specific app ###
 static/
-postgres_data/
+postgres-data/
 
 
 # End of https://www.gitignore.io/api/python
