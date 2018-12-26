@@ -11,3 +11,8 @@ class DepartmentModelsTestCase(TestCase):
     def test_create_new_contact_user(self):
         contact = Contact.objects.create(user=self.user, address='604 Nui Thanh, Da Nang')
         self.assertTrue(contact)
+
+    def test_default_string_contact(self):
+        self.test_create_new_contact_user()
+        contact = Contact.objects.get(user=self.user)
+        self.assertTrue('604 Nui Thanh, Da Nang', contact.__str__())

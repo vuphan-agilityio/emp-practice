@@ -7,7 +7,7 @@ class EmployeeIndex(indexes.SearchIndex, indexes.Indexable):
 
     text = indexes.CharField(document=True)
     email = indexes.CharField(model_attr='user__email')
-    age = indexes.IntegerField(model_attr='age')
+    age = indexes.IntegerField(model_attr='age', null=True)
 
     def get_model(self):
         return Employee

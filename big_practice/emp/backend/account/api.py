@@ -404,9 +404,23 @@ class AuthenticationResource(MultipartResource, ModelResource):
         """Support api to get user."""
 
         if access_token is not None:
+            # Try get payload from access_token
+            try:
+                payload = jwt.decode(
+                    access_token,
+                    JWT_AUTH.get('JWT_SECRET'),
+                    algorithms=[JWT_AUTH.get('JWT_ALGORITHM')])
+            except jwt.DecodeError:
+                raise CustomBadRequest(
+                    error_type='UNAUTHORIZED',
+                    error_message='The token is invalid')
+            except jwt.ExpiredSignatureError:
+                raise CustomBadRequest(
+                    error_type='UNAUTHORIZED',
+                    error_message='The token is expired')
             # Try get user by access token in request
             try:
-                user = User.objects.get(auth_token__key=access_token)
+                user = User.objects.get(id=payload['user_id'])
                 return user
             except User.DoesNotExist:
                 raise CustomBadRequest(

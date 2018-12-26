@@ -21,21 +21,21 @@ class EmployeeManager(models.Manager):
     def with_raw_sql_get_employees_has_status_code_is_true(self):
         from django.db import connection
         with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM employee WHERE status_code = 1")
+            cursor.execute("SELECT * FROM account_employee WHERE status_code = 1")
             row = cursor.fetchall()
             return row
 
     def with_raw_sql_get_employees_get_age_great_more_than_25(self):
         from django.db import connection
         with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM employee WHERE age > 25")
+            cursor.execute("SELECT * FROM account_employee WHERE age > 25")
             row = cursor.fetchall()
             return row
 
     def with_raw_sql_get_avg_of_employees(self):
         from django.db import connection
         with connection.cursor() as cursor:
-            cursor.execute("SELECT AVG(age) FROM employee")
+            cursor.execute("SELECT AVG(age) FROM account_employee")
             row = cursor.fetchall()
             return row
 

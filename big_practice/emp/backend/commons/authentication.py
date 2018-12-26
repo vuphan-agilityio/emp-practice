@@ -51,6 +51,7 @@ class AccessTokenAuthentication(Authentication):
         # Try get user by access token in request
         try:
             user = User.objects.get(id=payload['user_id'])
+            print('exp: ', payload['exp'])
         except User.DoesNotExist:
             raise CustomBadRequest(
                 error_type='INVALID_DATA',

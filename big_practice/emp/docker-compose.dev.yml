@@ -19,6 +19,7 @@ services:
         command: /runserver.sh
         depends_on:
             - postgres
+            - redis
         environment:
             - POSTGRES_USER=postgres
             - USE_DOCKER=yes

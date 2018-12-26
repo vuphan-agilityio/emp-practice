@@ -15,4 +15,5 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
 DATABASES['default'] = env.db("DATABASE_URL")
 
+# Allowed hosts on aws
 ALLOWED_HOSTS = ['3.16.57.114']

@@ -60,16 +60,22 @@ class ContactResource(ModelResource):
             bundle.request.body,
             format=bundle.request.META.get('CONTENT_TYPE', 'application/join'))
         if data is not None:
-            user_target_id = data.get('user_target_id', '')
+            user_target_id = data.get('user_target_id', None)
             address = data.get('address', '')
         else:
             raise CustomBadRequest(
                 error_type='Authorization',
                 error_message='Can not get data from request')
 
-        user_email = bundle.request.user
-        user_assign = User.objects.get(email=user_email)
-        user_target = User.objects.get(pk=user_target_id)
+        try:
+            user_email = bundle.request.user
+            user_assign = User.objects.get(email=user_email)
+            user_target = User.objects.get(pk=user_target_id)
+        except User.DoesNotExist:
+            raise CustomBadRequest(
+                error_type='Database',
+                error_message='Can not get user from database')
+
 
         try:
             contact = Contact.objects.create(
