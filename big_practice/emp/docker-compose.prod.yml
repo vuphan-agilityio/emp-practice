@@ -6,8 +6,6 @@ services:
         ports:
             - "5432:5432"
         env_file: .env
-        volumes:
-            - ./postgres-data:/var/lib/postgresql/data
 
     django:
         build:
@@ -16,13 +14,10 @@ services:
             target: prod
         depends_on:
             - postgres
-            - redis
         command: /gunicorn.sh
         volumes:
             - .:/code
         env_file: .env
-        links:
-            - postgres
 
     nginx:
         build: ../devops/compose/nginx
