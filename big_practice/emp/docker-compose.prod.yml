@@ -3,6 +3,8 @@ version: '3.4'
 services:
     postgres:
         build: ../devops/compose/postgres
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
         ports:
             - "5432:5432"
         env_file: .env
@@ -14,6 +16,7 @@ services:
             target: prod
         depends_on:
             - postgres
+            - redis
         command: /gunicorn.sh
         volumes:
             - .:/code
