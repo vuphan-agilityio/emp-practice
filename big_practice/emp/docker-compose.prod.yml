@@ -16,10 +16,13 @@ services:
             target: prod
         depends_on:
             - postgres
+            - redis
         command: /gunicorn.sh
         volumes:
             - .:/code
         env_file: .env
+        links:
+            - postgres
 
     nginx:
         build: ../devops/compose/nginx
